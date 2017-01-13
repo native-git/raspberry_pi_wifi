@@ -1,0 +1,25 @@
+# These are the instructions for configuring a raspberry_pi to autoconnect to Wifi on boot:
+
+1. Download and install wpa_supplicant using apt-get
+
+2. Copy wpa_supplicant.conf file into /etc/wpa_supplicant/ so it ends up as --> /etc/wpa_supplicant/wpa_supplicant.conf
+
+3. Copy the text from rc.local into /etc/rc.local and make sure it has executable permissions and is owned by root
+
+4. Copy the text from interfaces into /etc/network/interfaces
+	* make sure the proper names for the interfaces are used such as eth0 and wlan0  (dependent on machine)
+
+5. Copy startup.sh into /home/pi/ directory and make sure it has executable permissions
+	* this script will also have to be modified depending on the network you are connecting to, and the machine specific details such as what drivers will be used
+
+-----------------------
+
+The way this all works is as follows:
+
+*wpa_supplicant.conf specifies the access point and how the pi should connect to it, as well as what password/credentials to use
+
+*startup.sh is a script that will set eth0 down, bring wlan0 up, run wpa_supplicant using the configuration file mentioned above, and run dhclient...this script needs root permissions to run properly which is why we add it to rc.local
+
+*rc.local is a repository for commands that will be run on boot, so it makes a call to run startup.sh
+
+
