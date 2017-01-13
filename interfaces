@@ -9,10 +9,10 @@ source-directory /etc/network/interfaces.d
 auto lo
 iface lo inet loopback
 
-iface enxb827eb0636d1 inet manual
+iface <CHANGE_ME> inet manual
 
-allow-hotplug enx801f02b6eab0
-iface enx801f02b6eab0 inet manual
+allow-hotplug wlan0
+iface wlan0 inet manual
     wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
 
 
